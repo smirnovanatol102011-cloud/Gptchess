@@ -1,0 +1,64 @@
+historyElement.innerHTML =
+            '<div class="empty">Ходы появятся здесь</div>';
+
+        return;
+    }
+
+    for (let i = 0; i < moves.length; i += 2) {
+
+        const row = document.createElement("div");
+        row.className = "history-row";
+
+        const number = document.createElement("span");
+        const white = document.createElement("span");
+        const black = document.createElement("span");
+
+        number.textContent = (i / 2 + 1) + ".";
+
+        white.textContent = moves[i];
+        black.textContent = moves[i + 1] || "";
+
+        row.append(number, white, black);
+
+        historyElement.appendChild(row);
+    }
+
+    historyElement.scrollTop = historyElement.scrollHeight;
+}
+
+document.getElementById("undo").addEventListener("click", () => {
+
+    chess.undo();
+
+    selected = null;
+    possibleMoves = [];
+
+    renderBoard();
+});
+
+document.getElementById("flip").addEventListener("click", () => {
+
+    flipped = !flipped;
+
+    selected = null;
+    possibleMoves = [];
+
+    renderBoard();
+});
+
+document.getElementById("restart").addEventListener("click", () => {
+
+    chess.reset();
+
+    selected = null;
+    possibleMoves = [];
+
+    renderBoard();
+});
+
+renderBoard();
+
+</script>
+
+</body>
+    </html>
